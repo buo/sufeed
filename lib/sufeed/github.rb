@@ -26,7 +26,6 @@ module Sufeed
       entries << entry
     end
 
-    # The first entry is just for testing the auto-update functionality.
-    entries.drop(1)
+    entries
   end
 end
