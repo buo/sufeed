@@ -1,8 +1,9 @@
 require 'json'
-require 'open-uri'
+require 'rest-client'
 
 module Sufeed
   def self.jsondata(url)
-    JSON.parse(open(url).read)
+    resp = RestClient.get(url)
+    JSON.parse(resp.body)
   end
 end
