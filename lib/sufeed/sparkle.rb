@@ -21,6 +21,7 @@ module Sufeed
 
       if node.respond_to? 'enclosure'
         item[:enclosure] = {
+          :shortVersionString => node.enclosure.attribute('sparkle:shortversionstring').to_s,
           :version => node.enclosure.attribute('sparkle:version').to_s,
           :url => node.enclosure.attribute('url').to_s,
           :type => node.enclosure.attribute('type').to_s,
