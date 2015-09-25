@@ -1,9 +1,9 @@
 require 'nokogiri'
 
 module Sufeed
-  def self.github(url)
+  def self.github(repo)
     entries = []
-    doc = Nokogiri::Slop(open(url))
+    doc = Nokogiri::Slop(open("https://github.com/#{repo}/releases.atom"))
     doc.xpath('//entry').each do |node|
       entry = {}
 
