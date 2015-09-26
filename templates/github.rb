@@ -1,5 +1,5 @@
 desc '{{NAME}}' do
-  # The first entry is just for testing the auto-update functionality.
+  # The first entry is a pre-release.
   latest = github('{{URL}}')[1]
   version = File.basename(latest[:link]).delete('v')
   url = "{{DOWNLOAD}}"
