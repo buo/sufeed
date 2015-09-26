@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'open-uri'
 
 module Sufeed
   def self.github(repo)
