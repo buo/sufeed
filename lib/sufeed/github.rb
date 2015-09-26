@@ -9,6 +9,7 @@ module Sufeed
     doc.xpath('//entry').each do |node|
       entry = {}
       entry[:id] = node.id.content
+      entry[:tag] = File.basename(entry[:id])
 
       if node.respond_to? 'title'
         entry[:title] = node.title.content
