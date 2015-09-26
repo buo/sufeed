@@ -4,6 +4,7 @@ require 'html'
 require 'jsondata'
 require 'location'
 require 'sparkle'
+require 'text'
 
 module Sufeed
   def self.check(name)
