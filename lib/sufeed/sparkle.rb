@@ -1,9 +1,10 @@
 require 'nokogiri'
+require 'rest-client'
 
 module Sufeed
   def self.sparkle(url)
     items = []
-    doc = Nokogiri::Slop(open(url))
+    doc = Nokogiri::Slop(RestClient.get(url).body)
     doc.xpath('//item').each do |node|
       item = {}
 
