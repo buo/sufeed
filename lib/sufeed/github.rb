@@ -2,10 +2,10 @@ require 'nokogiri'
 require 'open-uri'
 
 module Sufeed
-  def self.github(repo)
   # TODO not to fetch the pre-releases
+  def self.github(url)
     entries = []
-    doc = Nokogiri::Slop(open("https://github.com/#{repo}/releases.atom"))
+    doc = Nokogiri::Slop(open(url))
     doc.xpath('//entry').each do |node|
       entry = {}
 
