@@ -8,10 +8,7 @@ module Sufeed
     doc = Nokogiri::Slop(open(url))
     doc.xpath('//entry').each do |node|
       entry = {}
-
-      if node.respond_to? 'id'
-        entry[:id] = node.id.content
-      end
+      entry[:id] = node.id.content
 
       if node.respond_to? 'title'
         entry[:title] = node.title.content
