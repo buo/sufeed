@@ -1,6 +1,6 @@
 desc 'apns-pusher' do
-  latest = github('https://github.com/blommegard/APNS-Pusher/releases.atom').first
-  version = latest[:tag].delete('v')
-  url = "https://github.com/blommegard/APNS-Pusher/releases/download/v#{version}/APNS.Pusher.app.zip"
+  latest = github('KnuffApp', 'APNS-Pusher').first
+  version = latest.tag_name.gsub(/v/, '')
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
