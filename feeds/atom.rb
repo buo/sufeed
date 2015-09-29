@@ -1,7 +1,6 @@
 desc 'atom' do
-  # The first entry is just for testing the auto-update functionality.
-  latest = github('https://github.com/atom/atom/releases.atom')[1]
-  version = latest[:title]
-  url = "https://github.com/atom/atom/releases/download/v#{version}/atom-mac.zip"
+  latest = github('atom', 'atom').first
+  version = latest.tag_name.gsub(/v/, '')
+  url = latest.assets.select { |e| e.name.match(/atom-mac\.zip/) }.first.browser_download_url
   {version => url}
 end
