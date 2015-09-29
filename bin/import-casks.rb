@@ -59,6 +59,7 @@ end
 
 each_cask do |cask|
   caskname = cask.to_s
+  puts caskname
   case get_type(cask)
   when 'github'
     puts "#{caskname}: github"
