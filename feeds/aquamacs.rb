@@ -1,6 +1,6 @@
 desc 'aquamacs' do
-  latest = github('https://github.com/davidswelt/aquamacs-emacs/releases.atom').first
-  version = latest[:tag].delete('emacs-')
-  url = "https://github.com/davidswelt/aquamacs-emacs/releases/download/Aquamacs-#{version}/Aquamacs-Emacs-#{version}.dmg"
+  latest = github('davidswelt', 'aquamacs-emacs').first
+  version = latest.tag_name.gsub(/^Aquamacs-/, '')
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
