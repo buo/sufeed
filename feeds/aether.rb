@@ -1,8 +1,8 @@
 desc 'aether' do
-  items = github('https://github.com/nehbit/aether-public/releases.atom')
-  items = items.select { |item| item[:id].match(/-OSX$/) }
-  latest = items.first
-  version = latest[:tag].delete('v').delete('-OSX')
-  url = "https://github.com/nehbit/aether-public/releases/download/v#{version}-OSX/Aether.#{version}.dmg"
+  items = github('nehbit', 'aether-public')
+  latest = items.select { |item| item.tag_name.match(/-OSX$/) }.first
+  version = latest.tag_name.gsub(/^v|-OSX$/, '')
+  package = latest.assets.select { |asset| asset.name.match(/\.dmg$/) }.first
+  url = package.browser_download_url
   {version => url}
 end
