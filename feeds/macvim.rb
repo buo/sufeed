@@ -1,8 +1,9 @@
 desc 'macvim' do
-  # The first entry is just for testing the auto-update functionality.
-  latest = github('https://github.com/macvim-dev/macvim/releases.atom')[1]
-  build = latest[:tag].delete('snapshot-')
-  version = "7.4-#{build}"
-  url = "https://github.com/macvim-dev/macvim/releases/download/snapshot-#{build}/MacVim-snapshot-#{build}.tbz"
+  latest = github('macvim-dev', 'macvim').select { |e| e.tag_name.match(/snapshot/) }.first
+  src = open('https://raw.githubusercontent.com/macvim-dev/macvim/master/src/version.h').read
+  version = src.match(/VIM_VERSION_SHORT\s+"(.*)"/)[1]
+  build = latest.tag_name.gsub(/snapshot-/, '')
+  version = "#{version}-#{build}"
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
