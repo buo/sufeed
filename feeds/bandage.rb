@@ -1,6 +1,6 @@
 desc 'bandage' do
-  latest = github('https://github.com/rrwick/Bandage/releases.atom').first
-  version = latest[:tag].delete('v')
-  url = "https://github.com/rrwick/Bandage/releases/download/v#{version}/Bandage_Mac_v#{version}.zip"
+  latest = github('rrwick', 'Bandage').first
+  version = latest.tag_name.gsub(/^v/, '')
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
