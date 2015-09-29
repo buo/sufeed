@@ -1,6 +1,6 @@
 desc 'hub' do
-  latest = github('https://github.com/github/hub/releases.atom').first
-  version = latest[:tag].delete('v')
-  url = "https://github.com/github/hub/releases/download/v#{version}/hub-mac-amd64-#{version}.tar.gz"
+  latest = github('github', 'hub').first
+  version = latest.tag_name.gsub(/^v/, '')
+  url = latest.assets.select { |e| e.name.match(/mac/) }.first.browser_download_url
   {version => url}
 end
