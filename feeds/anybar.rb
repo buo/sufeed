@@ -1,6 +1,6 @@
 desc 'anybar' do
-  latest = github('https://github.com/tonsky/AnyBar/releases.atom').first
-  version = latest[:tag]
-  url = "https://github.com/tonsky/AnyBar/releases/download/#{version}/AnyBar-#{version}.zip"
+  latest = github('tonsky', 'AnyBar').first
+  version = latest.tag_name
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
