@@ -1,6 +1,6 @@
 desc 'autodmg' do
-  latest = github('https://github.com/MagerValp/AutoDMG/releases.atom').first
-  version = latest[:tag].delete('v')
-  url = "https://github.com/MagerValp/AutoDMG/releases/download/v#{version}/AutoDMG-#{version}.dmg"
+  latest = github('MagerValp', 'AutoDMG').first
+  version = latest.tag_name.gsub(/^v/, '')
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
