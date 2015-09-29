@@ -1,7 +1,6 @@
 desc 'androidtool' do
-  # The first entry is a pre-release.
-  latest = github('https://github.com/mortenjust/androidtool-mac/releases.atom')[1]
-  version = latest[:tag]
-  url = "https://github.com/mortenjust/androidtool-mac/releases/download/#{version}/AndroidTool.zip"
+  latest = github('mortenjust', 'androidtool-mac').first
+  version = latest.tag_name
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
