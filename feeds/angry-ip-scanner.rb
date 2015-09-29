@@ -1,6 +1,6 @@
 desc 'angry-ip-scanner' do
-  latest = github('https://github.com/angryziber/ipscan/releases.atom').first
-  version = latest[:tag]
-  url = "https://github.com/angryziber/ipscan/releases/download/#{version}/ipscan-mac-#{version}.zip"
+  latest = github('angryziber', 'ipscan').first
+  version = latest.tag_name
+  url = latest.assets.select { |e| e.name.match(/mac/) }.first.browser_download_url
   {version => url}
 end
