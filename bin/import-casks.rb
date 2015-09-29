@@ -62,8 +62,11 @@ each_cask do |cask|
   case get_type(cask)
   when 'github'
     puts "#{caskname}: github"
+    m = cask.appcast.to_s.match(/https:\/\/github\.com\/([^\/]+)\/([^\/]+)/)
+    owner = m[1]
+    repo = m[2]
     tmpl = Template.new 'github'
-    tmpl.render(:name => caskname, :url => cask.appcast, :download => cask.url)
+    tmpl.render(:name => caskname, :owner => owner, :repo => repo)
     tmpl.save(caskname)
   end
 end
