@@ -1,6 +1,6 @@
 desc 'bilibili' do
-  latest = github('https://github.com/typcn/bilibili-mac-client/releases.atom').first
-  version = latest[:title]
-  url = "https://github.com/typcn/bilibili-mac-client/releases/download/#{version}/Bilibili.dmg.zip"
+  latest = github('typcn', 'bilibili-mac-client').first
+  version = latest.tag_name
+  url = latest.assets.first.browser_download_url
   {version => url}
 end
