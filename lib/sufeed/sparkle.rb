@@ -21,12 +21,12 @@ module Sufeed
       end
 
       if node.respond_to? 'enclosure'
-        svs = node.enclosure.attribute('shortVersionString')
-        svs = node.enclosure.attribute('sparkle:shortversionstring') unless svs
+        shortVersionString = node.enclosure.attribute('shortVersionString')
+        shortVersionString = node.enclosure.attribute('sparkle:shortversionstring') unless shortVersionString
         version = node.enclosure.attribute('version')
         version = node.enclosure.attribute('sparkle:version') unless version
         item[:enclosure] = {
-          :shortVersionString => svs.to_s,
+          :shortVersionString => shortVersionString.to_s,
           :version => version.to_s,
           :url => node.enclosure.attribute('url').to_s,
           :type => node.enclosure.attribute('type').to_s,
