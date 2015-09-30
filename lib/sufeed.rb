@@ -15,6 +15,10 @@ module Sufeed
     eval(contents)
   end
 
+  def self.exist?(name)
+    File.exist? File.expand_path("../../feeds/#{name}.rb", __FILE__)
+  end
+
   def self.desc(name, &prc)
     prc.call
   end
