@@ -1,6 +1,8 @@
 desc 'appserver' do
   latest = github('appserver-io', 'appserver').first
-  version = latest.tag_name
-  url = latest.assets.select { |e| e.name.match(/\.pkg/) }.first.browser_download_url
+  package = latest.assets.select { |e| e.name.match(/\.pkg/) }.first
+  build = package.name.match(/-(\d+)_x86_64\.pkg/)[1]
+  version = "#{latest.tag_name}-#{build}"
+  url = package.browser_download_url
   {version => url}
 end
