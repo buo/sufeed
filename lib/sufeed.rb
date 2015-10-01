@@ -2,6 +2,7 @@ $LOAD_PATH.push(File.expand_path('../sufeed', __FILE__))
 require 'github'
 require 'html'
 require 'jsondata'
+require 'latest'
 require 'location'
 require 'sparkle'
 require 'text'
