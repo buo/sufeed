@@ -1,6 +1,6 @@
 desc 'moneywell' do
-  latest = sparkle('http://nothirst.com/feeds/MoneyWell2Appcast.xml').first
-  version = latest[:enclosure][:shortVersionString]
-  url = latest[:enclosure][:url]
-  {version => url}
+  item = sparkle('http://nothirst.com/feeds/MoneyWell2Appcast.xml').first
+  version = item.enclosure.shortVersionString
+  url = item.enclosure.url
+  Latest.new(version: version, url: url)
 end
