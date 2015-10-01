@@ -1,6 +1,6 @@
 desc '{{NAME}}' do
-  latest = sparkle('{{URL}}').first
-  version = latest[:enclosure][:shortVersionString]
-  url = latest[:enclosure][:url]
   {version => url}
+  item = sparkle('{{URL}}').first
+  version = item.enclosure.shortVersionString
+  url = item.enclosure.url
 end
