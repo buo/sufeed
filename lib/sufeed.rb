@@ -1,3 +1,5 @@
+require 'hashie'
+
 $LOAD_PATH.push(File.expand_path('../sufeed', __FILE__))
 require 'github'
 require 'html'

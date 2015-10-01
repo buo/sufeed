@@ -1,4 +1,3 @@
-require 'hashie'
 require 'nokogiri'
 require 'rest-client'
 
