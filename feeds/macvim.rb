@@ -5,5 +5,5 @@ desc 'macvim' do
   build = latest.tag_name.gsub(/snapshot-/, '')
   version = "#{version}-#{build}"
   url = latest.assets.first.browser_download_url
-  {version => url}
+  Latest.new(version: version, url: url)
 end
