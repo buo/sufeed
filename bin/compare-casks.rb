@@ -27,7 +27,7 @@ each_cask do |cask|
     cask = Hbc.load caskname
     update = Sufeed.check caskname
 
-    if cask.version != update.keys.first
+    if cask.version != update.version
       puts update
     end
   end
