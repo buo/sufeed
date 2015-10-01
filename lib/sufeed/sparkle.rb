@@ -15,6 +15,8 @@ module Sufeed
 
       if node.respond_to? 'pubdate'
         item.pubDate = Time.parse node.pubdate.content
+      elsif node.respond_to? 'pubDate'
+        item.pubDate = Time.parse node.pubDate.content
       end
 
       if node.respond_to? 'releasenoteslink'
