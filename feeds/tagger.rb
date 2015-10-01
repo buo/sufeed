@@ -3,5 +3,5 @@ desc 'tagger' do
   package = latest.assets.first
   version = package.name.match(/([\d\.]+)\.zip/)[1]
   url = package.browser_download_url
-  {version => url}
+  Latest.new(version: version, url: url)
 end
