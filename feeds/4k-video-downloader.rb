@@ -3,5 +3,5 @@ desc '4k-video-downloader' do
   url = doc.at_css('.download-button')[:href]
   m = url.match(/4kvideodownloader_([\d\.]+)\.dmg/)
   version = m[1]
-  {version => url}
+  Latest.new(version: version, url: url)
 end
