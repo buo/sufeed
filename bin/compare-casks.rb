@@ -24,7 +24,6 @@ each_cask do |cask|
   puts caskname
 
   if Sufeed.exist? caskname
-    cask = Hbc.load caskname
     update = Sufeed.check caskname
 
     if cask.version != update.version
