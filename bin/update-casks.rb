@@ -1,12 +1,25 @@
 #!/usr/bin/env ruby
 # encoding: utf-8
 
+require 'optparse'
+
 $LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
 require 'sufeed'
 require 'caskr'
 
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: check.rb [options]"
+
+  opts.on("--verbose", "Turn on verbose output") do |v|
+    options[:verbose] = v
+  end
+end.parse!
+
 Caskr.each_cask do |cask|
-  puts "#{cask}: #{cask.version}"
+  if options[:verbose]
+    puts "#{cask}: #{cask.version}"
+  end
   next if cask.version == :latest
 
   if Sufeed.exist? cask.to_s
