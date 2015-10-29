@@ -13,6 +13,7 @@ require 'text'
 module Sufeed
   # Fetch the latest
   def self.fetch(name)
+    raise "Could not find the feed" unless exist? name
     path = File.expand_path("../../feeds/#{name}.rb", __FILE__)
     contents = File.open(path, 'rb') do |handle|
       handle.read

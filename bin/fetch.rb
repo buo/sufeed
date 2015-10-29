@@ -3,4 +3,8 @@
 $LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
 require 'sufeed'
 
-puts Sufeed.fetch ARGV.first
+begin
+  puts Sufeed.fetch ARGV.first
+rescue => err
+  puts err
+end
