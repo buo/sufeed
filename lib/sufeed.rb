@@ -12,6 +12,7 @@ require 'sufeed/html'
 require 'sufeed/jsondata'
 require 'sufeed/latest'
 require 'sufeed/location'
+require 'sufeed/plist'
 require 'sufeed/sparkle'
 require 'sufeed/text'
 
