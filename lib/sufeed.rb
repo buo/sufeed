@@ -1,15 +1,19 @@
 require 'hashie'
 
-$LOAD_PATH.push(File.expand_path('../sufeed', __FILE__))
-require 'checksum'
-require 'config'
-require 'github'
-require 'html'
-require 'jsondata'
-require 'latest'
-require 'location'
-require 'sparkle'
-require 'text'
+SUFEED_ROOT = File.expand_path('../..', __FILE__)
+SUFEED_LIB = File.expand_path('lib', SUFEED_ROOT)
+$LOAD_PATH.push(SUFEED_ROOT)
+$LOAD_PATH.push(SUFEED_LIB)
+require 'sufeed/checksum'
+require 'sufeed/config'
+require 'sufeed/feed'
+require 'sufeed/github'
+require 'sufeed/html'
+require 'sufeed/jsondata'
+require 'sufeed/latest'
+require 'sufeed/location'
+require 'sufeed/sparkle'
+require 'sufeed/text'
 
 module Sufeed
   # Fetch the latest
@@ -19,7 +23,14 @@ module Sufeed
     contents = File.open(path, 'rb') do |handle|
       handle.read
     end
-    eval(contents)
+    Feed.new name: name, latest: eval(contents)
+  end
+
+  def self.each_feed
+    Dir.glob("#{SUFEED_ROOT}/feeds/*.rb") do |filename|
+      name = File.basename(filename, ".rb")
+      yield fetch name
+    end
   end
 
   def self.exist?(name)
