@@ -33,7 +33,8 @@ module Sufeed
   def self.github(owner, repo, options = {})
     options[:draft] = false if options[:draft].nil?
     options[:prerelease] = false if options[:prerelease].nil?
-    releases = Github.repos.releases.list owner: owner, repo: repo
+    hub = Github.new oauth_token: @@config["github_token"]
+    releases = hub.repos.releases.list owner: owner, repo: repo
     releases = releases.select do |release|
       release.draft == options[:draft] and release.prerelease == options[:prerelease]
     end

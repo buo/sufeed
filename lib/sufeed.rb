@@ -2,6 +2,7 @@ require 'hashie'
 
 $LOAD_PATH.push(File.expand_path('../sufeed', __FILE__))
 require 'checksum'
+require 'config'
 require 'github'
 require 'html'
 require 'jsondata'
