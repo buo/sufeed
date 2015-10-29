@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 BREW_HOME = `brew --repository`.strip
-CASK_HOME = "#{BREW_HOME}/Library/Taps/phinze/homebrew-cask"
+CASK_HOME = "#{BREW_HOME}/Library/Taps/caskroom/homebrew-cask"
 $LOAD_PATH.unshift("#{CASK_HOME}/lib")
 
 require 'vendor/homebrew-fork/global'
