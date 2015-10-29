@@ -3,31 +3,45 @@
 
 $LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
 require 'sufeed'
+require 'caskr'
 
-BREW_HOME = `brew --repository`.strip
-CASK_HOME = "#{BREW_HOME}/Library/Taps/caskroom/homebrew-cask"
-$LOAD_PATH.unshift("#{CASK_HOME}/lib")
+Caskr.each_cask do |cask|
+  puts "#{cask}: #{cask.version}"
+  next if cask.version == :latest
 
-require 'vendor/homebrew-fork/global'
-require 'hbc'
+  if Sufeed.exist? cask.to_s
+    latest = Sufeed.fetch(cask.to_s).latest
+    if latest and cask.version != latest.version
+      puts <<EOF
+--------------------------------------------------------------------------------
+#{latest}
+--------------------------------------------------------------------------------
+EOF
+      Caskr.update_cask cask, latest
+    end
+  else
+    # check update automatically
+    next unless cask.appcast
+    next unless cask.appcast.sha256
 
-def each_cask
-  Dir.glob("#{CASK_HOME}/Casks/*.rb") do |filename|
-    caskname = File.basename(filename, ".rb")
-    cask = Hbc.load(caskname)
-    yield cask
-  end
-end
-
-each_cask do |cask|
-  caskname = cask.to_s
-  puts caskname
-
-  if Sufeed.exist? caskname
-    update = Sufeed.check caskname
-
-    if cask.version != update.version
-      puts update
+    begin
+      update = Caskr.fetch(cask)
+      if update
+        puts <<EOF
+--------------------------------------------------------------------------------
+#{cask}: #{update[:curver]} -> #{update[:newver]}
+#{update[:appsha256]}
+-> #{update[:latest_sha256]}
+#{update[:cursha256]}
+-> #{update[:newsha256]}
+--------------------------------------------------------------------------------
+EOF
+        Caskr.update_cask cask, update
+      else
+        #puts "#{cask}: #{cask.version}"
+      end
+    rescue => err
+      puts "#{cask}: #{err}"
     end
   end
 end
