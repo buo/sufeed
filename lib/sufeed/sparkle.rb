@@ -12,10 +12,14 @@ module Sufeed
         item.title = node.title.content
       end
 
-      if node.respond_to? 'pubdate'
-        item.pubDate = Time.parse node.pubdate.content
-      elsif node.respond_to? 'pubDate'
-        item.pubDate = Time.parse node.pubDate.content
+      begin
+        if node.respond_to? 'pubdate'
+          item.pubDate = Time.parse node.pubdate.content
+        elsif node.respond_to? 'pubDate'
+          item.pubDate = Time.parse node.pubDate.content
+        end
+      rescue
+        # exceptions caused by Time.parse
       end
 
       if node.respond_to? 'releasenoteslink'
