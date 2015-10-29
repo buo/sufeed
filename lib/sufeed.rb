@@ -11,7 +11,8 @@ require 'sparkle'
 require 'text'
 
 module Sufeed
-  def self.check(name)
+  # Fetch the latest
+  def self.fetch(name)
     path = File.expand_path("../../feeds/#{name}.rb", __FILE__)
     contents = File.open(path, 'rb') do |handle|
       handle.read

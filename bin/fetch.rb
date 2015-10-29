@@ -3,4 +3,4 @@
 $LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
 require 'sufeed'
 
-puts Sufeed.check ARGV.first
+puts Sufeed.fetch ARGV.first
