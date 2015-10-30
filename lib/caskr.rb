@@ -70,7 +70,7 @@ module Caskr
       end
     else
       contents.gsub!(/version '#{args[:curver]}'/, "version '#{args[:newver]}'")
-      contents.gsub!(args[:appsha256], "#{args[:latest_sha256]}\n  # url \"#{args[:appcast].latest_url}\"")
+      contents.gsub!(args[:appsha256], "#{args[:latest_sha256]}'\n  # url \"#{args[:appcast].latest_url}\"")
       contents.gsub!(args[:cursha256], args[:newsha256])
     end
     IO.write(caskfile, contents)
