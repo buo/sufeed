@@ -55,7 +55,7 @@ EOF
       end
     end
   rescue => err
-    puts "#{cask}: #{err}"
+    puts "\n#{cask}: #{err}"
     puts err.backtrace.join("\n")
   end
 end
