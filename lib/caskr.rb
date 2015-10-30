@@ -62,16 +62,18 @@ module Caskr
       contents.gsub!(/^  url "/, "  # url \"#{args.url}\"\n  url \"")
       unless cask.sha256.nil?
         contents.gsub!(cask.sha256, Sufeed.checksum(args.url))
-        unless cask.appcast.nil? or cask.appcast.sha256.nil?
-          contents.gsub!(cask.appcast.sha256, Sufeed.checksum(cask.appcast.to_s))
-        else
-          puts '------------- MISSING appcast sha256'
-        end
+        # TODO they doesn't yet take advantage of the shasum of appcasts
+        #unless cask.appcast.nil? or cask.appcast.sha256.nil?
+        #  contents.gsub!(cask.appcast.sha256, Sufeed.checksum(cask.appcast.to_s))
+        #else
+        #  puts '------------- MISSING appcast sha256'
+        #end
       end
     else
       contents.gsub!(/version '#{args[:curver]}'/, "version '#{args[:newver]}'")
       contents.gsub!(args[:appsha256], "#{args[:latest_sha256]}'\n  # url \"#{args[:appcast].latest_url}\"")
-      contents.gsub!(args[:cursha256], args[:newsha256])
+      # TODO they doesn't yet take advantage of the shasum of appcasts
+      #contents.gsub!(args[:cursha256], args[:newsha256])
     end
     IO.write(caskfile, contents)
   end
