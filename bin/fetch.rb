@@ -19,12 +19,8 @@ name = ARGV.first
 cask = Caskr.load_cask(name)
 if Sufeed.exist? cask.to_s
   latest = Sufeed.fetch(cask.to_s).latest
+  puts latest
   if latest and cask.version != latest.version
-    puts <<EOF
---------------------------------------------------------------------------------
-#{latest}
---------------------------------------------------------------------------------
-EOF
     Caskr.update_cask cask, latest if options[:write]
   end
 else
