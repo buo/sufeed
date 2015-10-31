@@ -16,6 +16,7 @@ require 'sufeed/location'
 require 'sufeed/plist'
 require 'sufeed/sparkle'
 require 'sufeed/text'
+require 'sufeed/xml'
 
 module Sufeed
   # Fetch the latest
