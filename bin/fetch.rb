@@ -32,8 +32,6 @@ else
 #{cask}: #{update[:curver]} -> #{update[:newver]}
 #{update[:appsha256]}
 -> #{update[:latest_sha256]}
-#{update[:cursha256]}
--> #{update[:newsha256]}
 --------------------------------------------------------------------------------
 EOF
       Caskr.update_cask cask, update if options[:write]
