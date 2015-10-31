@@ -4,6 +4,7 @@ SUFEED_ROOT = File.expand_path('../..', __FILE__)
 SUFEED_LIB = File.expand_path('lib', SUFEED_ROOT)
 $LOAD_PATH.push(SUFEED_ROOT)
 $LOAD_PATH.push(SUFEED_LIB)
+require 'sufeed/atom'
 require 'sufeed/checksum'
 require 'sufeed/config'
 require 'sufeed/feed'
