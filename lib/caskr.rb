@@ -35,19 +35,14 @@ module Caskr
       puts newver
     end
 
-    cursha256 = cask.appcast.sha256
-    newsha256 = appcast.sha256
-
-    if curver < newver and cursha256 != newsha256
+    if curver < newver
       puts "downloading... #{appcast.latest_url}"
       return {
         :appcast => appcast,
         :name => cask.to_s,
         :curver => curver,
         :newver => newver,
-        :cursha256 => cursha256,
-        :newsha256 => newsha256,
-        :appsha256 => cask.sha256,
+        :sha256 => cask.sha256,
         #Digest::SHA256.new.update(open(appcast.latest_url).read).to_s
         :latest_sha256 => `curl "#{appcast.latest_url}" | shasum -a 256`.split(/\s/).first
       }
@@ -62,18 +57,10 @@ module Caskr
       contents.gsub!(/^  url "/, "  # url \"#{args.url}\"\n  url \"")
       unless cask.sha256.nil?
         contents.gsub!(cask.sha256, Sufeed.checksum(args.url))
-        # TODO they doesn't yet take advantage of the shasum of appcasts
-        #unless cask.appcast.nil? or cask.appcast.sha256.nil?
-        #  contents.gsub!(cask.appcast.sha256, Sufeed.checksum(cask.appcast.to_s))
-        #else
-        #  puts '------------- MISSING appcast sha256'
-        #end
       end
     else
       contents.gsub!(/version '#{args[:curver]}'/, "version '#{args[:newver]}'")
-      contents.gsub!(args[:appsha256], "#{args[:latest_sha256]}'\n  # url \"#{args[:appcast].latest_url}\"")
-      # TODO they doesn't yet take advantage of the shasum of appcasts
-      #contents.gsub!(args[:cursha256], args[:newsha256])
+      contents.gsub!(args[:sha256], "#{args[:latest_sha256]}'\n  # url \"#{args[:appcast].latest_url}\"")
     end
     IO.write(caskfile, contents)
   end
