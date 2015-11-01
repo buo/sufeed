@@ -44,7 +44,7 @@ module Caskr
         :newver => newver,
         :sha256 => cask.sha256,
         #Digest::SHA256.new.update(open(appcast.latest_url).read).to_s
-        :latest_sha256 => `curl "#{appcast.latest_url}" | shasum -a 256`.split(/\s/).first
+        :latest_sha256 => Sufeed.checksum(appcast.latest_url)
       }
     end
   end
