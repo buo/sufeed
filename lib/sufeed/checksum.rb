@@ -8,11 +8,8 @@ module Sufeed
     redirected = location(url)
     puts "Redirected to #{redirected}" if url != redirected
     Curl::Easy.download(redirected, file.path)
-    #sha256 = Digest::SHA2.file(file.path).hexdigest
-    sha256 = Digest::SHA2.hexdigest open(file.path).read
-    file.close
-    file.unlink
 
+    sha256 = Digest::SHA2.file(file.path).hexdigest
     return sha256
   end
 end
